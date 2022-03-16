@@ -1,0 +1,20 @@
+@import "../../scss/index.scss";
+
+.user-not-found {
+  padding: 30px;
+  p {
+    text-align: center;
+
+    &:nth-child(1) {
+      font-size: 35px;
+      font-weight: bold;
+    }
+    &:nth-child(2) {
+      font-size: 16px;
+    }
+  }
+  a {
+    display: block;
+    text-align: center;
+  }
+}
