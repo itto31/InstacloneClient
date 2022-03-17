@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import client from "./config/apollo";
 import { ApolloProvider } from "@apollo/client";
 import Auth from './pages/Auth';
-import { getToken,decodeToken} from "./utils/token"
+import { getToken,decodeToken, removeToken} from "./utils/token"
 import AuthContext from "./context/AuthContext";
 import Navigation from './routes/Navigation';
 
@@ -19,7 +19,8 @@ export default function App() {
   }, [])
 
   const logout = () => {
-    console.log("Cerrar sesión");
+   removeToken();
+   setAuth(null);
   };
 
   const setUser = (user) => {

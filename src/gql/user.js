@@ -42,3 +42,9 @@ mutation register($input:UserInput){
   }
 }
     `;
+
+    export const DELETE_AVATAR = gql`
+    mutation deleteAvatar{
+    deleteAvatar
+}
+`;

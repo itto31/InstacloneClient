@@ -12,3 +12,7 @@ export function getToken(){
 export function decodeToken(token){
     return jwrDecode(token);
 }
+
+export function removeToken(){
+    localStorage.removeItem(TOKEN);
+}

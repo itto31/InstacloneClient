@@ -3,7 +3,7 @@ import "./AvatarForm.scss"
 import {Button} from "semantic-ui-react"
 import {useDropzone} from "react-dropzone"
 import {useMutation} from "@apollo/client"
-import {UPDATE_AVATAR, GET_USER} from "../../../gql/user"
+import {UPDATE_AVATAR, GET_USER, DELETE_AVATAR} from "../../../gql/user"
 import Swal from 'sweetalert2'
 
 export default function AvatarForm(props) {
@@ -23,6 +23,22 @@ export default function AvatarForm(props) {
         getUser:{...getUser, avatar:updateAvatar.urlAvatar}
       }
      })
+    }
+  });
+  
+  const [deleteAvatar]=useMutation(DELETE_AVATAR,{
+    update(cache){
+    const {getUser} = cache.readQuery({
+      query:  GET_USER,
+      variables:{username:auth.username},
+    }) ;
+    cache.writeQuery({
+      query:  GET_USER,
+      variables:{username:auth.username},
+      data:{
+        getUser:{...getUser, avatar:""}
+      }
+    })
     }
   });
 
@@ -59,10 +75,32 @@ export default function AvatarForm(props) {
       onDrop,
     })
 
+    const onDeleteAvatar = async () => {
+      try {
+        const result = await deleteAvatar();
+        const {data} = result;
+
+        if (!data.deleteAvatar){
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: data.deleteAvatar.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
+
+        }else{
+          setShowModal(false);
+        }
+      } catch (error) {
+        console.log(error, "error");
+      }
+    };
+
   return (
   <div className='avatar-form'>
       <Button {...getRootProps()} loading={loading}>Cargar una foto</Button>
-      <Button>Eliminar foto actual</Button>
+      <Button onClick={onDeleteAvatar}>Eliminar foto actual</Button>
       <Button onClick={() => setShowModal(false)}>Cancelar </Button>
       <input {...getInputProps()} />
   </div>)
