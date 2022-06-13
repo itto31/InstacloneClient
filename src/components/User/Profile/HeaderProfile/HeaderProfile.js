@@ -1,9 +1,56 @@
 import React from 'react'
 import "./HeaderProfile.scss"
 import { Button } from 'semantic-ui-react'
+import {useQuery, useMutation} from "@apollo/client"
+import {IS_FOLLOW, FOLLOW, UN_FOLLOW} from "../../../../gql/follow"
 
 export default function HeaderProfile(props) {
     const {getUser, auth, handlerModal} = props;
+    const {data, loading,refetch} = useQuery(IS_FOLLOW, {
+        variables: {
+          username:getUser.username},
+    })
+
+    const [follow] = useMutation(FOLLOW);
+    const [unFollow] = useMutation(UN_FOLLOW);
+
+
+    const buttonFollow = () =>{
+        if(data.isFollow){
+          return(
+            <Button className='btn-danger' onClick={onUnFollow}>Dejar de seguir</Button>
+          )
+        }else{
+          return(
+            <Button className='btn-action' onClick={onFollow}>Seguir</Button>
+          )
+        }
+    }
+    const onFollow = async() =>{
+      try{
+        await follow({
+          variables:{
+              username:getUser.username
+          } 
+        })
+        refetch()
+      }catch(error){
+        console.log(error)
+      }
+    }
+    const onUnFollow = async() =>{
+      try{
+        await unFollow({
+          variables:{
+              username:getUser.username
+          } 
+        })
+        refetch()
+      }catch(error){
+        console.log(error)
+      }
+    }
+
   return (
    
    <div className="header-profile">
@@ -13,7 +60,7 @@ export default function HeaderProfile(props) {
            getUser.username === auth.username ?(
             <Button onClick={() => handlerModal("settings")}>Ajustes</Button>
            ):(
-            <Button>Seguir</Button>
+            !loading && buttonFollow()
            )
        }
         

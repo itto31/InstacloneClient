@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "apollo-link-context": "^1.0.20",
     "apollo-upload-client": "^17.0.0",
+    "cors": "^2.8.5",
     "formik": "^2.2.9",
     "graphql": "^16.2.0",
     "jwt-decode": "^3.1.2",

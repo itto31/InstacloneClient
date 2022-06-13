@@ -48,3 +48,21 @@ mutation register($input:UserInput){
     deleteAvatar
 }
 `;
+
+export const UPDATE_USER = gql`
+mutation updateUser($input: UpdateUserInput){
+  updateUser(input: $input)
+}
+`;
+
+export const SEARCH = gql` 
+query search($search: String){
+  search(search: $search){
+    name
+    username
+    email
+    avatar
+  }
+}
+
+`

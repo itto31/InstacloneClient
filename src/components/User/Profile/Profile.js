@@ -10,10 +10,11 @@ import AvatarForm from '../AvatarForm';
 import userAuth from "../../../hooks/useAuth";
 import HeaderProfile from './HeaderProfile';
 import SettingsForm from '../SettingsForm';
+import Followers from './Followers';
 
 export default function Profile(props) {
-    const {username} = props;
-    const {data,loading,error} = useQuery(GET_USER, {variables:{username}});
+    const {username,totalpublications} = props;
+    const {data,loading,error,refetch} = useQuery(GET_USER, {variables:{username}});
     const [showModal, setShowModal] = useState(false);
     const [childrenModal, setChildrenModal] = useState(null)
     const [titleModal, setTitleModal] = useState("")
@@ -36,7 +37,9 @@ export default function Profile(props) {
                        <SettingsForm 
                        setShowModal={setShowModal}
                        setTitleModal={setTitleModal}
-                       setChildrenModal={setChildrenModal}/>
+                       setChildrenModal={setChildrenModal}
+                       getUser={getUser}
+                       refetch={refetch}/>
                     );
                     setShowModal(true);
                     break;
@@ -53,7 +56,7 @@ export default function Profile(props) {
         </Grid.Column>
         <Grid.Column width={11} className='profile__right'>
        <HeaderProfile getUser={getUser} auth={auth} handlerModal={handlerModal}/>
-       <div>Followers</div>
+       <Followers username={username} totalpublications={totalpublications}/>
          <div className='other'>
              <p className='name'>{getUser.name}</p>
              {getUser.siteWeb &&(

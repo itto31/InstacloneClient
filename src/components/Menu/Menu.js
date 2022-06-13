@@ -4,6 +4,7 @@ import "./Menu.scss";
 import Logo from "../../assets/png/instaclone.png";
 import {Link} from "react-router-dom"
 import RightHeader from './RightHeader';
+import Search from './Search';
 export default function Menu() {
     return(
       <div className='menu'>
@@ -15,7 +16,7 @@ export default function Menu() {
                       </Link>
                   </Grid.Column>
                   <Grid.Column width={10}>
-                    <p>Buscador</p>
+                    <Search/>
                   </Grid.Column>
                   <Grid.Column width={3}>
                    <RightHeader/>
