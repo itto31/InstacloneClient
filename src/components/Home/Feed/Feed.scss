@@ -1,72 +1,87 @@
 @import "../../../scss/index.scss";
 
-.feed{
-    padding-top: 50px;
-    height: calc(100vh - 48px);
-    overflow-y: scroll;
-    
-    &::-webkit-scrollbar {
-        display: none;
+.feed {
+  padding-top: 50px;
+  height: calc(100vh - 48px);
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .feed__not-found {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 120px;
+    height: 100%;
+    font-size: 20px;
+    font-weight: 600;
+
+    &__title {
+      font-size: 30px;
+      margin-bottom: 10px;
     }
+    .sinfoto {
+      width: 40%;
+      margin-top: 30px;
+      opacity: 0.8;
+    }
+  }
 
-    &__box{
-        margin-bottom: 50px;
-        border: 1px solid $border-grey;
+  &__box {
+    margin-bottom: 50px;
+    border: 1px solid $border-grey;
 
-        &-user{
-            background-color: $background-light;  
-            padding: 15px !important;
-            color: $font-dark;
-      
-            img{
-                margin-right: 15px !important;
-            }
-      
-            span{
-                font-weight: bold;
-            }
-           
+    &-user {
+      background-color: $background-light;
+      padding: 15px !important;
+      color: $font-dark;
+
+      img {
+        margin-right: 15px !important;
+      }
+
+      span {
+        font-weight: bold;
+      }
+    }
+    &-photo {
+      height: 600px;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    &-options {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      &-actions {
+        padding: 5px 5px;
+
+        i {
+          margin-right: 10px !important;
+        }
+      }
+
+      &-comments {
+        display: flex;
+        align-items: center;
+        position: relative !important;
+        margin-left: 5px !important;
+        i.comment {
+          font-size: 25px !important;
+          &:hover {
+            cursor: pointer;
+            opacity: 0.9 !important;
           }
-        &-photo{
-            height: 600px;
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
-
         }
-        &-options{ 
-            display: flex;
-            align-items: center;
-            height: 100%;   
-        &-actions{
-            padding: 5px 5px;
-
-            i{
-                margin-right: 10px !important;
-            }
-        }
-
-        &-comments{
-            display: flex;
-            align-items: center;
-            position: relative !important;;  
-            margin-left: 5px !important;
-            i.comment{
-                font-size: 25px !important;
-                &:hover{
-                    cursor: pointer;
-                    opacity: 0.9 !important;
-                }
-            }
-        }
-
+      }
     }
-        &-form{
-            >form{
-                position: relative !important;
-            }
-        }
+    &-form {
+      > form {
+        position: relative !important;
+      }
     }
-    
-    
+  }
 }
